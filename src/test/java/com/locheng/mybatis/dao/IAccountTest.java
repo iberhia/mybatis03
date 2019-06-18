@@ -1,5 +1,7 @@
 package com.locheng.mybatis.dao;
 
+import com.locheng.mybatis.pojo.Account;
+import com.locheng.mybatis.pojo.AccountUser;
 import com.locheng.mybatis.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -12,11 +14,11 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.util.List;
 
-public class IDaoTest {
+public class IAccountTest {
 
     private InputStream inputStream;
     private SqlSession sqlSession;
-    private IUserDao iUserDao;
+    private IAccountDao iAccountDao;
 
     @Before
     public void init() throws Exception{
@@ -24,7 +26,7 @@ public class IDaoTest {
         inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         sqlSession = sqlSessionFactory.openSession();
-        iUserDao = sqlSession.getMapper(IUserDao.class);
+        iAccountDao = sqlSession.getMapper(IAccountDao.class);
     }
 
     @After
@@ -35,9 +37,17 @@ public class IDaoTest {
 
     @Test
     public void selectAll() {
-        List<User> userList = iUserDao.selectAll();
-        for (User user : userList) {
-            System.out.println(user);
+        List<Account> accountList = iAccountDao.selectAll();
+        for (Account account : accountList) {
+            System.out.println(account);
+        }
+    }
+
+    @Test
+    public void selectAllAccountUser() {
+        List<Account> accountList = iAccountDao.selectAllAccountUser();
+        for (Account account : accountList) {
+            System.out.println(account);
         }
     }
 }

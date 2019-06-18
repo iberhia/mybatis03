@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--suppress ALL -->
+<mapper namespace="com.locheng.mybatis.dao.IAccountDao">
+    <select id="selectAll" resultMap="accountUserMap">
+        select u.*,a.id as a.aid,a.uid,a.money from account a,user u where a.uid=u.id;
+    </select>
+    <select id="selectAllAccountUser" resultType="AccountUser">
+        select a.*,u.username,u.password from account a,user u where a.uid=u.id;
+    </select>
+    <resultMap id="accountUserMap" type="account">
+        <id property="id" column="aid"></id>
+        <result property="uid" column="uid"></result>
+        <result property="money" column="money"></result>
+        <association property="user" column="uid" javaType="user">
+            <id property="id" column="u id"></id>
+            <result property="username" column="username"></result>
+            <result property="password" column="password"></result>
+        </association>
+    </resultMap>
+</mapper>

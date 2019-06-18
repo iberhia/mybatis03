@@ -4,6 +4,6 @@ import com.locheng.mybatis.pojo.User;
 
 import java.util.List;
 
-public interface IDao {
+public interface IUserDao {
     List<User> selectAll();
 }
